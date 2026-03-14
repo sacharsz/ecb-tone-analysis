@@ -11,9 +11,9 @@ import pandas as pd
 from pathlib import Path
 
 from config import PATHS, EXPECTED_N_CONFERENCES, EXPECTED_MEAN_WORD_COUNT, DATE_START, DATE_END
-from transcript_fetcher import load_urls_from_warin_csv, load_transcripts_from_warin_csv
-from scorer import score_all_documents
-from logger import setup_logger
+from src.data.transcript_fetcher import load_urls_from_warin_csv, load_transcripts_from_warin_csv
+from src.sentiment.scorer import score_all_documents
+from src.utils.logger import setup_logger
 
 logger = setup_logger()
 

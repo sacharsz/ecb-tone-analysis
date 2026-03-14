@@ -15,9 +15,9 @@ où :
 """
 
 import pandas as pd
-from cleaner import extract_windows
-from dictionary import get_words, count_pattern_matches
-from logger import setup_logger
+from src.preprocessing.cleaner import extract_windows
+from src.sentiment.dictionary import get_words, count_pattern_matches
+from src.utils.logger import setup_logger
 
 logger = setup_logger()
 
