@@ -11,6 +11,7 @@ import pandas as pd
 from pathlib import Path
 
 from config import PATHS, EXPECTED_N_CONFERENCES, EXPECTED_MEAN_WORD_COUNT, DATE_START, DATE_END
+from src.analysis.regression import run_regression_preset
 from src.data.transcript_fetcher import load_urls_from_warin_csv, load_transcripts_from_warin_csv
 from src.sentiment.scorer import score_all_documents
 from src.utils.logger import setup_logger
@@ -102,20 +103,33 @@ def step3_compute_scores(
 
     return scores_df
 
-
 def run_pipeline():
     """Pipeline complet."""
     logger.info("╔══════════════════════════════════════╗")
     logger.info("║     ECB SENTIMENT PIPELINE           ║")
     logger.info("╚══════════════════════════════════════╝")
 
-    step1_collect_urls()
-    documents = step2_fetch_transcripts()
-    scores_df = step3_compute_scores(documents)
+    output_path = Path(PATHS["scores"])
+    if output_path.exists():
+        logger.info(f"Fichier de scores déjà présent → {output_path}")
+        logger.info("Étapes 1 à 3 ignorées (reprise depuis le CSV existant).")
+        scores_df = pd.read_csv(output_path)
+        logger.info(f"  Fichier de sortie : {PATHS['scores']}")
+        logger.info(f"  Prochaine étape : ouvrir notebooks/02_sentiment_validation.ipynb")
+    else:
+        step1_collect_urls()
+        documents = step2_fetch_transcripts()
+        scores_df = step3_compute_scores(documents)
 
+    regression_result = run_regression_preset(scores_df, preset_name='eonia_paper_step2')
+    beta_hat = regression_result['beta_hat']
+    hac = regression_result['hac']
+    logger.info(f"Coefficients de régression estimés : {beta_hat.flatten()}")
+    logger.info(
+        "HAC (maxlags=4) pour sentiment_lag : "
+        f"coef={hac['coef']:.6f}, se={hac['se']:.6f}, p-value={hac['pvalue']:.6f}, IC95%=[{hac['lower']:.6f}, {hac['upper']:.6f}]"
+    )
     logger.info("\n✓ Pipeline terminé avec succès.")
-    logger.info(f"  Fichier de sortie : {PATHS['scores']}")
-    logger.info(f"  Prochaine étape : ouvrir notebooks/02_sentiment_validation.ipynb")
     return scores_df
 
 
