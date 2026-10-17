@@ -14,7 +14,7 @@ The policy rate passes through to EONIA with a coefficient of 1.15 (about 1.14 i
 
 - Each transcript is split into sentences. Around each occurrence of a target keyword (*inflation*, *interest rate(s)*, *unemployment*), the 10 words before and after are kept, and stop words are removed.
 - The words of the window are matched against the paper's dictionary of hawkish and dovish terms (its Table A1, including truncated patterns such as `ris*` or `increas*`).
-- A window scores (hawkish matches − dovish matches) divided by its number of words. Scores are averaged per keyword and per press conference, which gives three topic indices and an aggregate one.
+- A window scores (hawkish matches − dovish matches) divided by its number of words. Window scores are summed per keyword and per press conference, which gives three topic indices and an aggregate one.
 
 **2. Predictive regressions** (`src/analysis`)
 
@@ -54,8 +54,8 @@ These signs match the paper.
 Its interpretation: the pass-through of the policy rate is slightly above one, so the market slightly overreacts to rate decisions, and the negative sentiment coefficients act as a correction.
 
 **Limitations.**
-A bag-of-words score misreads context: "inflation is too low and must rise" counts as hawkish, although it calls for looser policy.
-This matters after 2014, when the index rises while rates stay at zero and the ECB communicates about a future normalization rather than moving rates.
+A bag-of-words score misreads context. "Inflation is not expected to rise" scores as hawkish, because "not" is removed as a stop word, and "we see downside risks to inflation" also scores as hawkish, because the pattern `ris*` matches "risks".
+This may explain part of the rise of the index after 2014, when rates stay at zero and the ECB talks about future normalization rather than moving rates.
 The sample stops in 2016, so the negative-rate years are only partly covered, and the paper's robustness check with the deposit facility rate is not reproduced.
 
 ## Usage
