@@ -407,6 +407,7 @@ def graph_beta_over_lags(
 
     fig.suptitle(f'Coefficient {focus_feature_display} en fonction du lag k', fontsize=13)
     plt.tight_layout()
+    fig.savefig(pvalues_path.parent / f'coef_{focus_feature_display}_by_lag.png', dpi=150)
     plt.show()
 
 

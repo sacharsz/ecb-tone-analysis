@@ -1,16 +1,8 @@
-# NLP / preprocessing
-nltk>=3.8.0
-
-# Data
+numpy>=1.24
 pandas>=2.0.0
-
-# Visualisation (pour les notebooks)
+nltk>=3.8.0
+statsmodels>=0.14.0
+requests>=2.31
 matplotlib>=3.7.0
 seaborn>=0.12.0
-
-# SVAR (étape suivante du projet)
-statsmodels>=0.14.0
-
-# Notebooks
 jupyter>=1.0.0
-ipykernel>=6.0.0
