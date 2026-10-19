@@ -24,7 +24,7 @@ For each index *X* and each lag *k* = 0, …, 12 press conferences:
 EONIA_t = β0 + β1 · X_{t−k} + β2 · MRO_t + ε_t
 ```
 
-MRO is the ECB's main refinancing rate. The regression is estimated by OLS with HAC standard errors (4 lags).
+EONIA is taken on the day of the press conference and MRO is the ECB's main refinancing rate. The regression is estimated by OLS with HAC standard errors (4 lags).
 β1 measures what the past tone adds to the current policy rate.
 
 ## Validation against the paper
@@ -46,7 +46,7 @@ The replication therefore uses 205 press conferences (October 1998 to December 2
 
 Coefficient β1 and its 95% HAC confidence interval, for each index and lag:
 
-- **Inflation and interest rate sentiment**: negative and significant from a lag of 3 (inflation) or 1 (interest rate) press conferences, and larger in magnitude at longer lags.
+- **Inflation and interest rate sentiment**: negative and significant from a lag of 4 (inflation) or 1 (interest rate) press conferences, and larger in magnitude at longer lags.
 - **Aggregate sentiment**: negative and significant from lag 1.
 - **Unemployment sentiment**: mostly not significant.
 

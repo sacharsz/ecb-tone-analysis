@@ -2,7 +2,7 @@ EONIA_PRESET = {
     'target_csv_path': 'data/raw/eonia_combined.csv',
     'target_col': 'rate',
     'target_name': 'rate',
-    'target_previous_day': True,
+    'target_previous_day': False,
     'controls': [
         {
             'csv_path': 'data/raw/mro_combined.csv',
@@ -32,7 +32,7 @@ EONIA_PAPER_STEP2_PRESET = {
     'target_csv_path': 'data/raw/eonia_combined.csv',
     'target_col': 'rate',
     'target_name': 'rate',
-    'target_previous_day': True,
+    'target_previous_day': False,
     'controls': [
         {
             'csv_path': 'data/raw/mro_combined.csv',
@@ -59,7 +59,7 @@ BUND10_PRESET = {
     'target_csv_path': 'data/raw/bund10_combined.csv',
     'target_col': 'rate',
     'target_name': 'bund10',
-    'target_previous_day': True,
+    'target_previous_day': False,
     'controls': [
         {
             'csv_path': 'data/raw/mro_combined.csv',
